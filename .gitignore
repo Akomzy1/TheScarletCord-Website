@@ -1,0 +1,33 @@
+# Next.js
+.next/
+out/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Build
+dist/
+
+# Env
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Original (uncompressed) source videos — keep only the optimised public/ versions
+Aerial_drone_shot_*.mp4
+Gemini_Generated_Image_*.png
+
+# Next.js cache
+*.tsbuildinfo
+next-env.d.ts
