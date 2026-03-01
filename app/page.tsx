@@ -14,11 +14,10 @@ const SERVICES = [
 ];
 
 const PROJECTS = [
-  { id: 1, title: "Four Points by Sheraton — Reception Hall Renovation", client: "Spazio Ideale / Marriott International", location: "Oniru Estate, Victoria Island, Lagos", year: 2022, category: "Renovation", desc: "Complete renovation of the reception hall for this internationally-branded hospitality landmark." },
-  { id: 2, title: "40-Unit 4-Bedroom Duplex Development", client: "Dillion Consultant Ltd", location: "19A MacDonald Road, Ikoyi, Lagos", year: 2022, category: "Residential", desc: "Large-scale construction of 40 units of 4-bedroom duplexes with boys' quarters in the heart of Ikoyi." },
-  { id: 3, title: "15-Unit 4-Bedroom Duplex Estate", client: "Dillion Consultant Ltd", location: "Millennium Estate, Oniru, Lagos", year: 2018, category: "Residential", desc: "Construction of 15 units of 4-bedroom duplexes with BQ behind British International School, Oniru." },
-  { id: 4, title: "Space Finish Africa / GTCO Fit-Out", client: "Space Finish Africa / GTCO", location: "Moshood Olugbani, Victoria Island, Lagos", year: 2021, category: "Interiors", desc: "Full interior fit-out works for a premium commercial office space on Victoria Island." },
-  { id: 5, title: "4-Bedroom Duplex Design — Ilawe-Ekiti", client: "Dr. Lekan Abioye", location: "Ilawe-Ekiti, Ekiti State", year: 2021, category: "Residential", desc: "Bespoke architectural design of a 4-bedroom duplex with 3D visualization." },
+  { id: 1, title: "Millennium Estate Project, Lekki", client: "Dillion Consultant Ltd", location: "Millennium Estate, Oniru, Lagos", year: 2022, category: "Residential", desc: "Large-scale residential development at Millennium Estate, Lekki.", image: "/mili.jpg" },
+  { id: 3, title: "5-Units of 2-Bedroom Flat", client: "Dillion Consultant Ltd", location: "Bariga, Lagos", year: 2026, category: "Residential", desc: "Construction of 5 units of 2-bedroom flats in Bariga, Lagos.", image: "/ongoing.jpg" },
+  { id: 4, title: "Interior Design", client: "Space Finish Africa / GTCO", location: "Toyin Street, Ikeja, Lagos", year: 2025, category: "Interiors", desc: "Full interior design for a modern space on Toyin Street, Ikeja.", image: "/inte.jpg" },
+  { id: 5, title: "RBT Project — Ikotun", client: "Dr. Lekan Abioye", location: "Ikotun, Lagos State", year: 2026, category: "Residential", desc: "Bespoke architectural design of a 4-bedroom duplex with 3D visualization.", image: "/ikotun.jpg" },
   { id: 6, title: "Interior Design — Horizon Estate", client: "Mr. Blossom", location: "Horizon Estate, Lekki, Lagos", year: 2022, category: "Interiors", desc: "Full interior design and decoration for a modern residential unit in Lekki." },
   { id: 7, title: "Interior Design — VGC Residence", client: "Mr. Aduro Matthew", location: "Victoria Garden City, Lagos", year: 2022, category: "Interiors", desc: "Luxury interior design for a private residence in Victoria Garden City." },
   { id: 8, title: "16-Unit 3-Bedroom Duplex Design", client: "Mr. Amos Gagar", location: "Sangotedo, Lekki, Lagos", year: 2022, category: "Residential", desc: "Architectural design of 16 units of 3-bedroom duplexes in the fast-growing Lekki corridor." },
@@ -300,7 +299,7 @@ body { font-family: var(--font-body); color: var(--charcoal); background: var(--
 .filter-btn.active, .filter-btn:hover { background: var(--charcoal); color: white; border-color: var(--charcoal); }
 .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .project-card { position: relative; overflow: hidden; border-radius: 4px; cursor: pointer; aspect-ratio: 4/3; background: var(--graphite); }
-.project-img { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #2D2D2D, #3D3D3D); font-family: var(--font-display); color: rgba(255,255,255,0.12); font-size: 48px; }
+.project-img { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #2D2D2D, #3D3D3D); font-family: var(--font-display); color: rgba(255,255,255,0.12); font-size: 48px; overflow: hidden; }
 .project-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,26,26,0.95) 0%, rgba(26,26,26,0.4) 50%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 28px; opacity: 0; transition: opacity 0.4s ease; }
 .project-card:hover .project-overlay { opacity: 1; }
 .project-cat { font-size: 11px; color: var(--scarlet-light); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 8px; }
@@ -565,7 +564,7 @@ function Hero({ setPage }: { setPage: (p: string) => void }) {
         <div className={`h-item d5 ${vc}`}>
           <div className="hero-stats">
             <CounterStat raw="5+" label="Years of Delivery" />
-            <CounterStat raw="9+" label="Featured Projects" />
+            <CounterStat raw="20+" label="Featured Projects" />
             <CounterStat raw="100%" label="Client Focused" />
           </div>
         </div>
@@ -635,7 +634,9 @@ function ProjectsPreview({ setPage }: { setPage: (p: string) => void }) {
           {featured.map((p, i) => (
             <FadeIn key={p.id} delay={i * 0.08}>
               <div className="project-card">
-                <div className="project-img">◇</div>
+                <div className="project-img">
+                  {p.image ? <Image src={p.image} alt={p.title} fill style={{ objectFit: "cover" }} /> : "◇"}
+                </div>
                 <div className="project-overlay">
                   <span className="project-cat">{p.category}</span>
                   <h3>{p.title}</h3>
@@ -874,7 +875,9 @@ function ProjectsPage() {
             {filtered.map((p, i) => (
               <FadeIn key={p.id} delay={i * 0.06}>
                 <div className="project-card" onClick={() => setSelected(p)}>
-                  <div className="project-img">◇</div>
+                  <div className="project-img">
+                    {p.image ? <Image src={p.image} alt={p.title} fill style={{ objectFit: "cover" }} /> : "◇"}
+                  </div>
                   <div className="project-overlay">
                     <span className="project-cat">{p.category}</span>
                     <h3>{p.title}</h3>
