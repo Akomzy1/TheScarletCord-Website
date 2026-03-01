@@ -512,7 +512,7 @@ function Hero({ setPage }: { setPage: (p: string) => void }) {
 
       <div className="hero-content">
         <div className={`h-item d1 ${vc}`}>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" width="500" height="100" style={{ display: "block", marginBottom: "8px" }}>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" width="100%" style={{ display: "block", marginBottom: "8px", maxWidth: "500px" }}>
             <text
               x="300" y="58"
               textAnchor="middle"
