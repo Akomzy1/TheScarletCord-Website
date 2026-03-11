@@ -18,10 +18,8 @@ const PROJECTS = [
   { id: 3, title: "5-Units of 2-Bedroom Flat", client: "Dillion Consultant Ltd", location: "Bariga, Lagos", year: 2026, category: "Residential", desc: "Construction of 5 units of 2-bedroom flats in Bariga, Lagos.", image: "/ongoing.jpg" },
   { id: 4, title: "Interior Design", client: "Space Finish Africa / GTCO", location: "Toyin Street, Ikeja, Lagos", year: 2025, category: "Interiors", desc: "Full interior design for a modern space on Toyin Street, Ikeja.", image: "/inte.jpg" },
   { id: 5, title: "RBT Project — Ikotun", client: "Dr. Lekan Abioye", location: "Ikotun, Lagos State", year: 2026, category: "Residential", desc: "Bespoke architectural design of a 4-bedroom duplex with 3D visualization.", image: "/ikotun.jpg" },
-  { id: 6, title: "Interior Design — Horizon Estate", client: "Mr. Blossom", location: "Horizon Estate, Lekki, Lagos", year: 2022, category: "Interiors", desc: "Full interior design and decoration for a modern residential unit in Lekki." },
-  { id: 7, title: "Interior Design — VGC Residence", client: "Mr. Aduro Matthew", location: "Victoria Garden City, Lagos", year: 2022, category: "Interiors", desc: "Luxury interior design for a private residence in Victoria Garden City." },
-  { id: 8, title: "16-Unit 3-Bedroom Duplex Design", client: "Mr. Amos Gagar", location: "Sangotedo, Lekki, Lagos", year: 2022, category: "Residential", desc: "Architectural design of 16 units of 3-bedroom duplexes in the fast-growing Lekki corridor." },
-  { id: 9, title: "4-Bedroom Duplex Design — Epe", client: "Mrs Emife Akomolede", location: "Epe, Lagos", year: 2022, category: "Residential", desc: "Custom 4-bedroom duplex design tailored for a serene Epe location." },
+  { id: 6, title: "GS Project, 4-Bedroom Duplex and 3 Units of 2-Bedroom Flat — Apollo Estate", client: "GS Project", location: "Ketu, Lagos State", year: 2026, category: "Residential", desc: "Residential development featuring a 4-bedroom duplex and 3 units of 2-bedroom flat at Apollo Estate, Ketu.", image: "/new2.jpg" },
+  { id: 10, title: "Renovation — Four Points By Sheraton Hotel Reception Hall", client: "Four Points By Sheraton", location: "Oniru Estate, Victoria Island, Lagos", year: 2022, category: "Renovation", desc: "Full renovation of the reception hall at Four Points By Sheraton Hotel, delivering a refined and modern hospitality experience.", image: "/new.jpg" },
 ];
 
 const TEAM = [
@@ -461,7 +459,7 @@ function Nav({ page, setPage, scrolled }: { page: string; setPage: (p: string) =
                 <a key={k} className={page === k ? "active" : ""} onClick={() => go(k)}>{labels[k]}</a>
               );
             })}
-            <a className="nav-cta" onClick={() => go("contact")}>Get a Quote</a>
+            <a className="nav-cta" href="https://wa.me/2348067343333" target="_blank" rel="noopener noreferrer">Get a Quote</a>
           </div>
           <button className="mobile-toggle" onClick={() => setMobileOpen(true)}>☰</button>
         </div>
@@ -552,9 +550,9 @@ function Hero({ setPage }: { setPage: (p: string) => void }) {
 
         <div className={`h-item d4 ${vc}`}>
           <div className="hero-btns">
-            <button className="btn-primary" onClick={() => { setPage("contact"); window.scrollTo(0, 0); }}>
+            <a className="btn-primary" href="https://wa.me/2348067343333" target="_blank" rel="noopener noreferrer">
               Request a Quote
-            </button>
+            </a>
             <button className="btn-outline" onClick={() => { setPage("projects"); window.scrollTo(0, 0); }}>
               View Projects
             </button>
@@ -564,7 +562,7 @@ function Hero({ setPage }: { setPage: (p: string) => void }) {
         <div className={`h-item d5 ${vc}`}>
           <div className="hero-stats">
             <CounterStat raw="5+" label="Years of Delivery" />
-            <CounterStat raw="20+" label="Featured Projects" />
+            <CounterStat raw="5+" label="Featured Projects" />
             <CounterStat raw="100%" label="Client Focused" />
           </div>
         </div>
@@ -921,23 +919,6 @@ function ProjectsPage() {
 }
 
 function ContactPage() {
-  const [form, setForm] = useState({ name: "", email: "", phone: "", service: "", message: "" });
-  const [sent, setSent] = useState(false);
-  const [errors, setErrors] = useState<Record<string, boolean>>({});
-
-  const validate = () => {
-    const e: Record<string, boolean> = {};
-    if (!form.name.trim()) e.name = true;
-    if (!form.email.trim() || !/\S+@\S+\.\S+/.test(form.email)) e.email = true;
-    if (!form.message.trim()) e.message = true;
-    return e;
-  };
-
-  const handleSubmit = () => {
-    const e = validate();
-    if (Object.keys(e).length) { setErrors(e); return; }
-    setSent(true);
-  };
 
   return (
     <>
@@ -966,41 +947,28 @@ function ContactPage() {
               </div>
             </FadeIn>
             <FadeIn delay={0.15} direction="left">
-              {sent ? (
-                <div className="form-success">
-                  <p style={{ fontSize: "20px", fontFamily: "var(--font-display)", marginBottom: "8px", color: "#2E7D32" }}>Message Sent!</p>
-                  <p>Thank you for reaching out. We&apos;ll get back to you within 24 hours.</p>
+              <div style={{ background: "#25D366", borderRadius: "6px", padding: "48px 40px", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: "24px", height: "100%" }}>
+                <div style={{ width: "72px", height: "72px", background: "white", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <svg viewBox="0 0 32 32" width="40" height="40" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 2C8.268 2 2 8.268 2 16c0 2.444.655 4.735 1.797 6.713L2 30l7.53-1.775A13.94 13.94 0 0 0 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.5a11.44 11.44 0 0 1-5.8-1.574l-.415-.247-4.468 1.053 1.085-4.35-.27-.44A11.46 11.46 0 0 1 4.5 16C4.5 9.596 9.596 4.5 16 4.5S27.5 9.596 27.5 16 22.404 27.5 16 27.5zm6.29-8.617c-.344-.172-2.037-1.004-2.352-1.118-.316-.115-.546-.172-.776.172-.23.344-.889 1.118-1.09 1.348-.2.23-.402.258-.746.086-.344-.172-1.452-.535-2.766-1.707-1.022-.912-1.713-2.038-1.913-2.382-.2-.344-.021-.53.15-.701.155-.154.344-.402.516-.603.172-.2.23-.344.344-.573.115-.23.058-.43-.029-.602-.086-.172-.776-1.87-1.063-2.561-.28-.673-.564-.582-.776-.592l-.66-.011c-.23 0-.603.086-.919.43-.315.344-1.204 1.176-1.204 2.867 0 1.692 1.233 3.326 1.405 3.555.172.23 2.427 3.707 5.879 5.198.822.355 1.463.567 1.963.726.825.263 1.576.226 2.169.137.661-.099 2.037-.832 2.323-1.635.287-.803.287-1.49.2-1.635-.085-.144-.315-.23-.66-.402z"/>
+                  </svg>
                 </div>
-              ) : (
-                <div className="contact-form">
-                  <div className="form-group">
-                    <label>Full Name *</label>
-                    <input value={form.name} onChange={e => { setForm({ ...form, name: e.target.value }); setErrors({ ...errors, name: false }); }} placeholder="Your full name" style={errors.name ? { borderColor: "var(--scarlet)" } : {}} />
-                  </div>
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label>Email *</label>
-                      <input value={form.email} onChange={e => { setForm({ ...form, email: e.target.value }); setErrors({ ...errors, email: false }); }} placeholder="email@example.com" style={errors.email ? { borderColor: "var(--scarlet)" } : {}} />
-                    </div>
-                    <div className="form-group">
-                      <label>Phone</label>
-                      <input value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} placeholder="+234..." />
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label>Service Needed</label>
-                    <select value={form.service} onChange={e => setForm({ ...form, service: e.target.value })}>
-                      <option value="">Select a service...</option>
-                      {SERVICES.map(s => <option key={s.id} value={s.title}>{s.title}</option>)}
-                    </select>
-                  </div>
-                  <div className="form-group">
-                    <label>Message *</label>
-                    <textarea value={form.message} onChange={e => { setForm({ ...form, message: e.target.value }); setErrors({ ...errors, message: false }); }} placeholder="Tell us about your project..." style={errors.message ? { borderColor: "var(--scarlet)" } : {}} />
-                  </div>
-                  <button className="btn-primary" onClick={handleSubmit} style={{ alignSelf: "flex-start" }}>Send Message</button>
+                <div>
+                  <p style={{ fontFamily: "var(--font-display)", fontSize: "26px", color: "white", marginBottom: "12px", lineHeight: "1.2" }}>Chat With Us on WhatsApp</p>
+                  <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.85)", lineHeight: "1.7", fontWeight: 300 }}>
+                    Have a project in mind? Send us a message directly on WhatsApp and we&apos;ll respond as quickly as possible.
+                  </p>
                 </div>
-              )}
+                <a
+                  href="https://wa.me/2348067343333"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ background: "white", color: "#25D366", padding: "16px 40px", borderRadius: "2px", fontWeight: 700, fontSize: "14px", letterSpacing: "0.06em", textTransform: "uppercase", textDecoration: "none", transition: "all 0.3s", display: "inline-block" }}
+                >
+                  Start a WhatsApp Chat
+                </a>
+                <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.65)" }}>+234 806 734 3333</p>
+              </div>
             </FadeIn>
           </div>
         </div>
